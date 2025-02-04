@@ -192,13 +192,13 @@ void help() {
 
         case OKEY_ENTER:
         case OKEY_DOWN:
-        case 'j':
+        case 'e':
             if (max >= delta + LINES - 1) delta++;
             break;
 
         case OKEY_DEL:
         case OKEY_UP:
-        case 'k':
+        case 'i':
             if (delta) delta--;
             break;
 
@@ -235,11 +235,11 @@ void help() {
             delta = 0;
             break;
 
-        case 'n':
+        case 'h':
             if (strlen(word_looked)) find_word(word_looked, 'f');
             break;
 
-        case 'N':
+        case 'H':
             if (strlen(word_looked)) find_word(word_looked, 'b');
             break;
 
