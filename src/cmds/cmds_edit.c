@@ -81,7 +81,7 @@ void do_editmode(struct block * sb) {
     int pos;
     int initial_position;
 
-    if (sb->value == L'h' || sb->value == OKEY_LEFT) {         // LEFT
+    if (sb->value == L'n' || sb->value == OKEY_LEFT) {         // LEFT
         if (real_inputline_pos) {
             real_inputline_pos--;
             inputline_pos = wcswidth(inputline, real_inputline_pos);
@@ -89,7 +89,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'l' || sb->value == OKEY_RIGHT) { // RIGHT
+    } else if (sb->value == L'o' || sb->value == OKEY_RIGHT) { // RIGHT
         if (real_inputline_pos < wcslen(inputline)-1) {
             real_inputline_pos++;
             inputline_pos = wcswidth(inputline, real_inputline_pos);
@@ -131,7 +131,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'I') {         // I
+    } else if (sb->value == L'S') {         // I
         inputline_pos = 0;
         real_inputline_pos = 0;
 #ifdef INS_HISTORY_FILE
@@ -142,7 +142,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'i' ||  sb->value == L'=') {         // i o =
+    } else if (sb->value == L's' ||  sb->value == L'=') {         // i o =
 #ifdef INS_HISTORY_FILE
         ori_insert_edit_submode = insert_edit_submode;
         add(insert_history, L"");
@@ -161,7 +161,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'r') {         // r
+    } else if (sb->value == L'w') {         // r
         //curs_set(1);
         if (ui_getch_b(&wi) != -1) inputline[real_inputline_pos] = wi;
         //curs_set(2);
@@ -215,7 +215,7 @@ void do_editmode(struct block * sb) {
         ui_update(TRUE);
         return;
 
-    } else if (sb->value == L'a') {         // a
+    } else if (sb->value == L't') {         // a
         real_inputline_pos++;
         inputline_pos = wcswidth(inputline, real_inputline_pos);
 #ifdef INS_HISTORY_FILE
@@ -226,7 +226,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'A') {         // A
+    } else if (sb->value == L'T') {         // A
         real_inputline_pos = wcslen(inputline);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
 #ifdef INS_HISTORY_FILE
@@ -244,7 +244,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'C') {         // C
+    } else if (sb->value == L'R') {         // C
         inputline[real_inputline_pos] = L'\0';
         inputline_pos = wcswidth(inputline, real_inputline_pos);
 #ifdef INS_HISTORY_FILE
@@ -255,7 +255,7 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L's') {         // s
+    } else if (sb->value == L'b') {         // s
         del_back_char();
 #ifdef INS_HISTORY_FILE
         ori_insert_edit_submode = insert_edit_submode;
@@ -275,7 +275,7 @@ void do_editmode(struct block * sb) {
         }
         return;
 
-    } else if (sb->value == L't') {         // t
+    } else if (sb->value == L'p') {         // t
         if (ui_getch_b(&wi) == -1) return;
         int initial_position = inputline_pos;
         if (inputline_pos < wcswidth(inputline, wcslen(inputline))) inputline_pos++ ;
@@ -313,43 +313,43 @@ void do_editmode(struct block * sb) {
         ui_show_header();
         return;
 
-    } else if (sb->value == L'w') {         // w
+    } else if (sb->value == L'u') {         // w
         real_inputline_pos = for_word(0, 0, 0);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'W') {         // W
+    } else if (sb->value == L'U') {         // W
         real_inputline_pos = for_word(0, 0, 1);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'e') {         // e
+    } else if (sb->value == L'y') {         // e
         real_inputline_pos = for_word(1, 0, 0);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'E') {         // E
+    } else if (sb->value == L'Y') {         // E
         real_inputline_pos = for_word(1, 0, 1);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'b') {         // b
+    } else if (sb->value == L'l') {         // b
         real_inputline_pos = back_word(0);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'B') {         // B
+    } else if (sb->value == L'L') {         // B
         real_inputline_pos = back_word(1);
         inputline_pos = wcswidth(inputline, real_inputline_pos);
         ui_show_header();
         return;
 
-    } else if (sb->value == L'R') {         // R
+    } else if (sb->value == L'W') {         // R
         //curs_set(1);
         if (ui_getch_b(&wi) == -1) return;
         wint_t c = wi;
@@ -366,12 +366,13 @@ void do_editmode(struct block * sb) {
         //curs_set(2);
 
 
-    } else if (sb->value == L'd' || sb->value == L'c') {         // d or c
+    } else if (sb->value == L'd' || sb->value == L'r') {         // d or c
         wint_t c, d;
         if (ui_getch_b(&wi) != -1) {
             c = wi;
             switch (c) {
             case L'$':
+            case L'O':
                 pos = wcswidth(inputline, wcslen(inputline)) - 1;
                 del_range_wchars(inputline, real_inputline_pos, pos);
                 if (real_inputline_pos == wcslen(inputline) && real_inputline_pos && sb->value == L'd') real_inputline_pos--;
@@ -385,7 +386,7 @@ void do_editmode(struct block * sb) {
                 if (pos != -1) del_range_wchars(inputline, real_inputline_pos, pos);
                 break;
 
-            case L't':
+            case L'p':
                 if (ui_getch_b(&wi) == -1) return;
                 initial_position = inputline_pos;
                 if (inputline_pos < wcswidth(inputline, wcslen(inputline))) inputline_pos++ ;
@@ -399,12 +400,14 @@ void do_editmode(struct block * sb) {
                 break;
 
             case L'0':                     // 0
+            case L'N':                     // 0
                 del_range_wchars(inputline, 0, real_inputline_pos-1);
                 real_inputline_pos = 0;
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
             case L'^':
+            case L'I':
                 pos = first_nonblank_char();
                 if (pos == -1) return;
                 del_range_wchars(inputline, pos, real_inputline_pos-1);
@@ -421,35 +424,35 @@ void do_editmode(struct block * sb) {
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
-            case L'e':                     // de or ce
+            case L'y':                     // de or ce
                 //OK
                 del_range_wchars(inputline, real_inputline_pos, for_word(1, 0, 0));
                 break;
 
-            case L'E':                     // dE or cE
+            case L'Y':                     // dE or cE
                 del_range_wchars(inputline, real_inputline_pos, for_word(1, 0, 1));
                 break;
 
-            case L'w':                     // dw or cw
+            case L'u':                     // dw or cw
                 del_range_wchars(inputline, real_inputline_pos, for_word(0, 1, 0) - 1);
                 if (real_inputline_pos == wcslen(inputline) && real_inputline_pos && sb->value == L'd') real_inputline_pos--;
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
-            case L'W':                     // dW or cW
+            case L'U':                     // dW or cW
                 del_range_wchars(inputline, real_inputline_pos, for_word(0, 1, 1) - 1);
                 if (real_inputline_pos == wcslen(inputline) && real_inputline_pos && sb->value == L'd') real_inputline_pos--;
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
-            case L'b':                     // db or cb
+            case L'l':                     // db or cb
                 d = back_word(0);
                 del_range_wchars(inputline, d, real_inputline_pos-1);
                 real_inputline_pos = d;
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
-            case L'B':                     // dB or cB
+            case L'L':                     // dB or cB
                 d = back_word(1);
                 del_range_wchars(inputline, d, real_inputline_pos-1);
                 real_inputline_pos = d;
@@ -464,7 +467,7 @@ void do_editmode(struct block * sb) {
                 inputline_pos = wcswidth(inputline, real_inputline_pos);
                 break;
 
-            case L'T':
+            case L'P':
                 if (ui_getch_b(&wi) == -1) return;
                 initial_position = inputline_pos;
                 if (inputline_pos) inputline_pos--;
@@ -479,12 +482,12 @@ void do_editmode(struct block * sb) {
                 }
                 break;
 
-            case L'l':                     // dl or cl
+            case L'o':                     // dl or cl
             case OKEY_RIGHT:
                 del_back_char();
                 break;
 
-            case L'h':                     // dh or ch
+            case L'n':                     // dh or ch
             case OKEY_LEFT:
                 del_for_char();
                 break;
@@ -505,7 +508,7 @@ void do_editmode(struct block * sb) {
                  }
                  break;
              }
-             if (sb->value == L'c') {
+             if (sb->value == L'r') {
 #ifdef INS_HISTORY_FILE
                  ori_insert_edit_submode = insert_edit_submode;
                  add(insert_history, L"");
