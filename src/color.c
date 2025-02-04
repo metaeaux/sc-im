@@ -100,9 +100,9 @@ void start_default_ucolors() {
     // NOTE: always increase N_INIT_PAIRS on each color definition you add.
     ucolors[ DEFAULT         ].fg = WHITE;
     ucolors[ DEFAULT         ].bg = DEFAULT_COLOR;
-    ucolors[ HEADINGS        ].bg = YELLOW;
+    ucolors[ HEADINGS        ].bg = DEFAULT_COLOR;
     ucolors[ HEADINGS        ].fg = BLACK;
-    ucolors[ HEADINGS_ODD    ].bg = YELLOW;
+    ucolors[ HEADINGS_ODD    ].bg = DEFAULT_COLOR;
     ucolors[ HEADINGS_ODD    ].fg = BLACK;
     ucolors[ GRID_EVEN       ].fg = WHITE;
     ucolors[ GRID_EVEN       ].bg = DEFAULT_COLOR;
@@ -161,6 +161,21 @@ void start_default_ucolors() {
     ucolors[ SHEET           ].bg = DEFAULT_COLOR;
     ucolors[ FILENM          ].fg = GREEN;
     ucolors[ FILENM          ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_NORMAL     ].fg = WHITE;
+    ucolors[ MODE_NORMAL     ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_NORMAL     ].bold = 1;
+    ucolors[ MODE_VISUAL     ].fg = WHITE;
+    ucolors[ MODE_VISUAL     ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_VISUAL     ].bold = 1;
+    ucolors[ MODE_INSERT     ].fg = WHITE;
+    ucolors[ MODE_INSERT     ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_INSERT     ].bold = 1;
+    ucolors[ MODE_EDIT       ].fg = WHITE;
+    ucolors[ MODE_EDIT       ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_EDIT       ].bold = 1;
+    ucolors[ MODE_COMMAND    ].fg = WHITE;
+    ucolors[ MODE_COMMAND    ].bg = DEFAULT_COLOR;
+    ucolors[ MODE_COMMAND    ].bold = 1;
 
     ui_start_colors(); // call specific ui startup routine
 }
@@ -234,6 +249,16 @@ void set_colors_param_dict() {
     put(d_colors_param, "ERROR_MSG", str);
     sprintf(str, "%d", MODE);
     put(d_colors_param, "MODE", str);
+    sprintf(str, "%d", MODE_NORMAL);
+    put(d_colors_param, "MODE_NORMAL", str);
+    sprintf(str, "%d", MODE_VISUAL);
+    put(d_colors_param, "MODE_VISUAL", str);
+    sprintf(str, "%d", MODE_INSERT);
+    put(d_colors_param, "MODE_INSERT", str);
+    sprintf(str, "%d", MODE_EDIT);
+    put(d_colors_param, "MODE_EDIT", str);
+    sprintf(str, "%d", MODE_COMMAND);
+    put(d_colors_param, "MODE_COMMAND", str);
     sprintf(str, "%d", CELL_ID);
     put(d_colors_param, "CELL_ID", str);
     sprintf(str, "%d", CELL_FORMAT);

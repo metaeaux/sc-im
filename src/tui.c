@@ -639,11 +639,17 @@ void ui_print_mode() {
     #endif
 
     if (curmode == NORMAL_MODE) {
-        strcat(strm, " -- NORMAL --");
+	#ifdef USECOLORS
+	ui_set_ucolor(input_win, &ucolors[MODE_NORMAL], DEFAULT_COLOR);
+	#endif
+        strcat(strm, " NORMAL ");
         ui_write_j(input_win, strm, row, RIGHT);
 
     } else if (curmode == INSERT_MODE) {
-        strcat(strm, " -- INSERT --");
+	#ifdef USECOLORS
+	ui_set_ucolor(input_win, &ucolors[MODE_INSERT], DEFAULT_COLOR);
+	#endif
+        strcat(strm, " INSERT ");
         ui_write_j(input_win, strm, row, RIGHT);
 
         #ifdef USECOLORS
@@ -653,19 +659,28 @@ void ui_print_mode() {
         mvwprintw(input_pad, 0, 0, "%c", insert_edit_submode);
 
     } else if (curmode == EDIT_MODE) {
-        strcat(strm, "   -- EDIT --");
+	#ifdef USECOLORS
+	ui_set_ucolor(input_win, &ucolors[MODE_EDIT], DEFAULT_COLOR);
+	#endif
+        strcat(strm, "  EDIT  ");
         ui_write_j(input_win, strm, row, RIGHT);
         // Show ^ in 0,0 position of pad
         mvwprintw(input_pad, 0, 0, "^");
 
     } else if (curmode == VISUAL_MODE) {
-        strcat(strm, " -- VISUAL --");
+	#ifdef USECOLORS
+	ui_set_ucolor(input_win, &ucolors[MODE_VISUAL], DEFAULT_COLOR);
+	#endif
+        strcat(strm, " VISUAL ");
         if (visual_submode != '0')
-            strcpy(strm, " << VISUAL >>");
+            strcpy(strm, "<VISUAL>");
         ui_write_j(input_win, strm, row, RIGHT);
 
     } else if (curmode == COMMAND_MODE) {
-        strcat(strm, "-- COMMAND --");
+	#ifdef USECOLORS
+	ui_set_ucolor(input_win, &ucolors[MODE_COMMAND], DEFAULT_COLOR);
+	#endif
+        strcat(strm, " COMMAND ");
 
         ui_write_j(input_win, strm, row, RIGHT);
         #ifdef USECOLORS
